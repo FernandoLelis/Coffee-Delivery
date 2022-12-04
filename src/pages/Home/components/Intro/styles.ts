@@ -9,7 +9,7 @@ export const IntroContainer = styled.section`
     background: ${({ theme }) => `url(${introBackgroundImg}) no-repeat center,
       linear-gradient(
         0deg,
-        ${theme.colors["base-white"]} 0%,
+        ${theme.colors["base-background"]} 0%,
         ${rgba(theme.colors["base-background"], 0.2)} 50%,
         ${theme.colors["base-background"]} 100%
       )`};
