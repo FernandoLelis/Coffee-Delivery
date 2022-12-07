@@ -42,7 +42,7 @@ export function OrderConfirmedPage() {
                     />
                     <InfoWithIcon
                         icon={<CurrencyDollar width="fill" />}
-                        iconBg={colors["brand-purple"]}
+                        iconBg={colors["brand-yellow-dark"]}
                         text={
                             <RegularText>
                                 Pagemento na entrega
