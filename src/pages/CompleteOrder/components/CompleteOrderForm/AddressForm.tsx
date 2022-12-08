@@ -27,7 +27,7 @@ export function AddressForm() {
             <Input 
                 placeholder="Rua" 
                 className="street" 
-                {...register("steet")}
+                {...register("street")}
                 error={errors.street?.message}
             />
             <Input 
@@ -41,6 +41,7 @@ export function AddressForm() {
                 className="complement" 
                 {...register("complement")}
                 error={errors.complement?.message}
+                rightText="Opcional"
             />
             <Input 
                 placeholder="Bairro" 

@@ -4,9 +4,30 @@ import confirmedOrderIllustration from "../../assets/confirmed-order.svg"
 import { InfoWithIcon } from "../../components/InfoWithIcon";
 import { Clock, CurrencyDollar, MapPin } from "phosphor-react";
 import { useTheme } from "styled-components";
+import { useLocation, useNavigate } from "react-router-dom";
+import { OrderData } from "../CompleteOrder";
+import { paymentMethods } from "../CompleteOrder/components/CompleteOrderForm/PaymentMethodOptions";
+import { useEffect } from "react";
+
+interface LocationType {
+    state: OrderData;
+}
 
 export function OrderConfirmedPage() {
     const { colors } = useTheme();
+
+    const { state } = useLocation() as unknown as LocationType;
+
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        if(!state) {
+            navigate("/")
+        }
+    }, []);
+
+    if (!state) return <></>;
+
     return (
         <OrderConfirmedContainer className="container">
             <div>
@@ -21,17 +42,17 @@ export function OrderConfirmedPage() {
             <section>
                 <OrderDetailsContainer>
                     <InfoWithIcon
-                        icon={<MapPin width="fill" />}
+                        icon={<MapPin weight="fill" />}
                         iconBg={colors["brand-purple"]}
                         text={
                             <RegularText>
-                                Entrega em <strong>Rua João Daniel Martinelli, 102 </strong> <br />
-                                Farrapos - Porto Alegre, RS
+                                Entrega em <strong>{state.street}, {state.number} </strong> <br />
+                                {state.district} - {state.city}, {state.uf}
                             </RegularText>
                         }
                     />
                     <InfoWithIcon
-                        icon={<Clock width="fill" />}
+                        icon={<Clock weight="fill" />}
                         iconBg={colors["brand-yellow"]}
                         text={
                             <RegularText>
@@ -41,14 +62,14 @@ export function OrderConfirmedPage() {
                         }
                     />
                     <InfoWithIcon
-                        icon={<CurrencyDollar width="fill" />}
+                        icon={<CurrencyDollar weight="fill" />}
                         iconBg={colors["brand-yellow-dark"]}
                         text={
                             <RegularText>
                                 Pagemento na entrega
                                 <br />
                                 <strong>
-                                  Cartão de crédito  
+                                  {paymentMethods[state.paymentMethod].label}  
                                 </strong>
                             </RegularText>
                         }
